@@ -46,6 +46,15 @@ public class UserService {
         return ResponseEntity.status(HttpStatus.OK).body(userResponseList);
     }
 
+    public ResponseEntity<UserResponse> listUserId(String userId) {
+        Optional<User> userList = userRepository.findById(userId);
+        if (userList.isEmpty()) {
+            throw new UserExceptionsNotFound(userId);
+        }
+        UserResponse userResponseList = modelMapper.map(userList, UserResponse.class);
+        return ResponseEntity.status(HttpStatus.OK).body(userResponseList);
+    }
+
     public ResponseEntity<UserResponse> updateUser(String id, UserRequestUpdate userRequestUpdate) {
         Optional<User> userOptional = userRepository.findById(id);
         if (userOptional.isEmpty()) {

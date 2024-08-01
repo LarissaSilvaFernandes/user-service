@@ -31,6 +31,11 @@ public class UserController {
         return userService.listUser();
     }
 
+    @GetMapping("{id}")
+    public ResponseEntity<UserResponse> getUserId(@PathVariable String id) {
+        return userService.listUserId(id);
+    }
+
     @PatchMapping("/update/{id}")
     public ResponseEntity<UserResponse> updateUser(@PathVariable String id, @RequestBody @Valid UserRequestUpdate userRequestUpdate) {
         return userService.updateUser(id, userRequestUpdate);
