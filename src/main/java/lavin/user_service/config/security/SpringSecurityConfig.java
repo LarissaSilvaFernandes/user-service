@@ -30,7 +30,9 @@ public class SpringSecurityConfig {
                     authorize.anyRequest().authenticated();
                 })
                 .exceptionHandling()
-                .authenticationEntryPoint(new JwtAuthenticationEntryPoint());
+                .authenticationEntryPoint(new JwtAuthenticationEntryPoint())
+                .and()
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
